@@ -4,10 +4,12 @@ import * as apiClient from "../api-client";
 
 type AppContext = {
   isLoggedIn: boolean;
+  isLoading: boolean;
 };
 
 const AppContext = React.createContext<AppContext | undefined>({
   isLoggedIn: false,
+  isLoading: true,
 });
 
 export const AppContextProvider = ({
@@ -16,7 +18,7 @@ export const AppContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useQuery("validateToken", apiClient.validateToken, {
+  const { isLoading } = useQuery("validateToken", apiClient.validateToken, {
     retry: false,
     onSuccess: () => {
       setIsLoggedIn(true);
@@ -30,6 +32,7 @@ export const AppContextProvider = ({
     <AppContext.Provider
       value={{
         isLoggedIn,
+        isLoading,
       }}
     >
       {children}

@@ -2,6 +2,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
+import AddHotel from "./pages/AddHotel";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
   return (
@@ -9,6 +11,18 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout>gfg</Layout>} />
         <Route path="/search" element={<Layout>search</Layout>} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/add-hotel"
+            element={
+              <Layout>
+                <AddHotel />
+              </Layout>
+            }
+          />
+        </Route>
+
         <Route
           path="/register"
           element={
@@ -25,6 +39,7 @@ function App() {
             </Layout>
           }
         />
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
