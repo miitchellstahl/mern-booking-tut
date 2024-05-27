@@ -5,6 +5,7 @@ import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import MyHotels from "./pages/MyHotels";
+import EditHotel from "./pages/EditHotel";
 
 function App() {
   return (
@@ -27,6 +28,15 @@ function App() {
             element={
               <Layout>
                 <MyHotels />
+              </Layout>
+            }
+          />
+
+          <Route
+            path="/edit-hotel/:hotelId"
+            element={
+              <Layout>
+                <EditHotel />
               </Layout>
             }
           />
