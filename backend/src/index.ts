@@ -4,7 +4,8 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
-import hotelRoutes from "./routes/my-hotels";
+import myHotelRoutes from "./routes/my-hotels";
+import hotelRoutes from "./routes/hotels";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
@@ -33,7 +34,8 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/my-hotels", hotelRoutes);
+app.use("/api/my-hotels", myHotelRoutes);
+app.use("/api/hotels", hotelRoutes);
 
 //used for conditional routes as a catch all for example add-hotels is a protected route and not compiled at run time
 //therefore this needs to be forwarded to the frontend so it's not mistaked as a api route

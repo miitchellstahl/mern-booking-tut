@@ -6,13 +6,21 @@ import AddHotel from "./pages/AddHotel";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
+import Search from "./pages/Search";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout>gfg</Layout>} />
-        <Route path="/search" element={<Layout>search</Layout>} />
+        <Route
+          path="/search"
+          element={
+            <Layout>
+              <Search />
+            </Layout>
+          }
+        />
 
         <Route element={<ProtectedRoute />}>
           <Route
