@@ -7,6 +7,8 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
+import Detail from "./pages/Detail";
+import Booking from "./pages/Booking";
 
 function App() {
   return (
@@ -21,8 +23,24 @@ function App() {
             </Layout>
           }
         />
+        <Route
+          path="/detail/:hotelId"
+          element={
+            <Layout>
+              <Detail />
+            </Layout>
+          }
+        />
 
         <Route element={<ProtectedRoute />}>
+          <Route
+            path="/hotel/:hotelId/booking"
+            element={
+              <Layout>
+                <Booking />
+              </Layout>
+            }
+          />
           <Route
             path="/add-hotel"
             element={
