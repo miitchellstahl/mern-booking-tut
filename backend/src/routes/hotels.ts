@@ -125,12 +125,14 @@ router.post(
         ...req.body,
         userId: req.userId,
       };
+      console.log(newBooking);
 
       const hotel = await Hotel.findOneAndUpdate(
         { _id: req.params.hotelId },
         {
-          $push: { bookings: newBooking },
-        }
+          $addToSet: { bookings: newBooking },
+        },
+        { new: true }
       );
 
       if (!hotel) {
@@ -139,7 +141,7 @@ router.post(
 
       await hotel.save();
 
-      res.status(200).send();
+      res.status(200).send(hotel);
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "something went wrong" });
@@ -202,6 +204,16 @@ const constructSearchQuery = (queryParams: any) => {
 
   return constructedQuery;
 };
+
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find().sort("-lastUpdated");
+    res.json(hotels);
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ message: "error fetching hotels" });
+  }
+});
 
 router.get(
   "/:id",

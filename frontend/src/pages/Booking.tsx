@@ -55,7 +55,6 @@ const Booking = () => {
     return <></>;
   }
 
-  console.log(currentUser?.email);
   return (
     <div className="grid md:grid-cols-[1fr_2fr] gap-3">
       <BookingDetailSummary
